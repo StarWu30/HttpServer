@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>MyHttpServer</title>
+	<style>.alsp{ font-family:"微软雅黑"; font-size:50px}</style>
+
+</head>
+	<script type="text/javascript">
+		function disptime(){
+			var today = new Date();
+			var hh = today.getHours();
+			var mm = today.getMinutes();
+			var ss = today.getSeconds();
+			document.getElementById("myclock").innerHTML="<h1>北京时间—"+hh+":"+mm+":"+ss+"</h1>"
+			}
+			var mytime = setInterval("disptime()",1000);
+	</script>	
+
+
+<body>
+	<div class="alsp">
+	<style> 
+      body{text-align:center} 
+    </style> 
+	<br>
+	<div >登录</div><br>
+    
+	</div>
+	<form action="/" method="POST">
+		输入用户名：
+		<input type="text" name="Name" value="" placeholder="usename" 
+		style="height:25px;width:200px;"><br><br>
+		输入密码：&nbsp &nbsp   
+		<input type="text" name="Pass" value="" placeholder="password"
+		style="height:25px;width:200px;"><br>
+		<br><br>
+		<input type="submit" value="登录" style="width:150px;height:20px>
+	</form>
+	<div id="myclock"></div><br><br><br>
+	<body style="background-image:url(img/background.jpg)">
+	<script language=JavaScript>
+
+var caution = false
+function setCookie(name, value, expires, path, domain, secure){
+var curCookie = name + "=" + escape(value) +
+((expires) ? "; expires=" + expires.toGMTString() : "") +
+((path) ? "; path=" + path : "") +
+((domain) ? "; domain=" + domain : "") +
+((secure) ? "; secure" : "")
+if (!caution || (name + "=" + escape(value)).length<= 4000)
+document.cookie = curCookie
+else
+if (confirm("Cookie exceeds 4KB and will be cut!"))
+document.cookie = curCookie
+}
+function getCookie(name) {
+var prefix = name + "="
+var cookieStartIndex = document.cookie.indexOf(prefix)
+if (cookieStartIndex == -1)
+return null
+var cookieEndIndex = document.cookie.indexOf(";", cookieStartIndex+ prefix.length)
+if (cookieEndIndex == -1)
+cookieEndIndex = document.cookie.length
+return unescape(document.cookie.substring(cookieStartIndex +prefix.length, cookieEndIndex))
+}
+function deleteCookie(name, path, domain) {
+if (getCookie(name)) {
+document.cookie = name + "=" +
+((path) ? "; path=" + path : "") +
+((domain) ? "; domain=" + domain : "") +
+"; expires=Thu, 01-Jan-70 00:00:01 GMT"
+}
+}
+function fixDate(date) {
+var base = new Date(0)
+var skew = base.getTime()
+if (skew > 0)
+date.setTime(date.getTime() - skew)
+}
+var now = new Date()
+fixDate(now)
+now.setTime(now.getTime() + 365 * 24 * 60 * 60 * 1000)
+var visits = getCookie("counter")
+if (!visits)
+visits = 1
+else
+visits = parseInt(visits) + 1
+setCookie("counter", visits, now)
+document.write("您是第" + visits + "位访问本网页的！")
+
+</script>
+</body>
+<body onload="disptime()">  
+        <div id="myclock"></div>  
+    </body>  
+	
+<form action="/" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+</form>
+</html>
